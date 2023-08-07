@@ -119,7 +119,8 @@ dependencies {
 
 
     //Shimmer - library for shimmer effect
-    implementation("com.facebook.shimmer:shimmer:0.5.0")
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+//    implementation ("com.todkars:shimmer-recyclerview:0.4.0")
 
     //Jsoup - HTML tag parsing library
     implementation("org.jsoup:jsoup:1.16.1")
