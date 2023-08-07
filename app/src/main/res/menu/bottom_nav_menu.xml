@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!--    ids for the item menu should exactly match
+    with the nav_graph fragment id when bottomNavView is associated
+    with NavController in the activity.-->
+    <item
+        android:id="@+id/receipesFragment"
+        android:icon="@drawable/ic_menu_book"
+        android:title="@string/recipes" />
+
+    <item
+        android:id="@+id/favoritesReceipes"
+        android:icon="@drawable/ic_star"
+        android:title="@string/favorites" />
+
+    <item
+        android:id="@+id/foodJokeFragment"
+        android:icon="@drawable/ic_joke"
+        android:title="@string/food_joke" />
+
+</menu>
