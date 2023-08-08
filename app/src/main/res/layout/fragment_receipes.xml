@@ -1,72 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/lightGray"
-    tools:context=".ui.fragments.recipe.RecipesFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipes_rv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:shimmer_demo_child_count="6"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:shimmer_demo_angle="20"
-        app:shimmer_demo_layout="@layout/recipe_list_item_shimmer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+    </data>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:clickable="true"
-        android:src="@drawable/ic_restaurant"
-        app:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white"
-        android:focusable="true"
-        android:contentDescription="@string/more_recipes" />
-
-    <LinearLayout
-        android:id="@+id/error_linear_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
+        android:layout_height="match_parent"
+        android:background="@color/lightGray"
+        tools:context=".ui.fragments.recipe.RecipesFragment">
 
-        <ImageView
-            android:id="@+id/sad_iv"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:alpha="0.5"
-            android:contentDescription="@string/sad_icon"
-            android:src="@drawable/ic_sad" />
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipes_rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:shimmer_demo_child_count="6"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:shimmer_demo_angle="20"
+            app:shimmer_demo_layout="@layout/recipe_list_item_shimmer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:src="@drawable/ic_restaurant"
+            app:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white"
+            android:focusable="true"
+            android:contentDescription="@string/more_recipes" />
+
+        <LinearLayout
+            android:id="@+id/error_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/no_internet_connection"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.32999998">
+
+            <ImageView
+                android:id="@+id/sad_iv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:alpha="0.5"
+                android:contentDescription="@string/sad_icon"
+                android:src="@drawable/ic_sad" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/no_internet_connection"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

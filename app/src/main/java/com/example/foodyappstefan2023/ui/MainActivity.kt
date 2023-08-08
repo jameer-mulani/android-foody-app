@@ -44,6 +44,9 @@ class MainActivity : AppCompatActivity() {
                     "Success, result : ${it.data!!.results.size}",
                     Toast.LENGTH_SHORT
                 ).show()
+
+
+
             }
 
             if (it is NetworkResult.Error) {
