@@ -1,4 +1,4 @@
-package com.example.foodyappstefan2023.data.models
+package com.example.foodyappstefan2023.models.data.models
 
 
 import com.google.gson.annotations.SerializedName

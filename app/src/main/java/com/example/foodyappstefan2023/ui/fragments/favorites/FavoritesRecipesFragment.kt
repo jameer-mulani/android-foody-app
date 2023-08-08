@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.foodyappstefan2023.R
+import dagger.hilt.android.AndroidEntryPoint
 
 class FavoritesRecipesFragment : Fragment() {
 

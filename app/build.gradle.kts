@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.foodyappstefan2023"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -93,9 +93,9 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$daggerHiltVersion")
 
-    val hiltLifecycleViewModel = "1.0.0-alpha03"
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleViewModel")
-    kapt("androidx.hilt:hilt-compiler:$hiltLifecycleViewModel")
+    val hiltLifecycleViewModel = "1.0.0-alpha01"
+//    implementation("androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleViewModel")
+//    kapt("androidx.hilt:hilt-compiler:$hiltLifecycleViewModel")
 
     //Coroutines
     val kotlinCoroutineVersion = "1.7.3"
