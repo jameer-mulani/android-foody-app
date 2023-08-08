@@ -1,4 +1,4 @@
-package com.example.foodyappstefan2023.models
+package com.example.foodyappstefan2023.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.foodyappstefan2023.models.data.models.FoodRecipe
 import com.example.foodyappstefan2023.models.repository.FoodRepository
+import com.example.foodyappstefan2023.utils.Constants.ErrorCodes
 import com.example.foodyappstefan2023.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -37,27 +38,37 @@ class MainViewModel @Inject constructor(
                 val response = foodRepository.remoteDataSource.getRecipes(queries)
                 _recipesResponse.value = handleRecipesResponse(response)
             } else {
-                _recipesResponse.value = NetworkResult.Error("No internet connection")
+                _recipesResponse.value = NetworkResult.Error(
+                    "No internet connection ${
+                        ErrorCodes.getErrorPrefix(
+                            ErrorCodes.NOT_INTERNET_CONNECTION
+                        )
+                    }"
+                )
             }
         } catch (e: Exception) {
-            _recipesResponse.value = NetworkResult.Error("Something went wrong, please try again!")
+            _recipesResponse.value = NetworkResult.Error(
+                "Something went wrong, please try again! ${
+                    ErrorCodes.getErrorPrefix(ErrorCodes.SOMETHING_WENT_WRONG)
+                }"
+            )
         }
 
     }
 
     private fun handleRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
         when {
-            response.message().contains("timeout") -> return NetworkResult.Error("Timeout")
-            response.code() == 402 -> return NetworkResult.Error("Api Limit exceeded")
-            response.body() == null -> return NetworkResult.Error("No recipe to found")
-            response.body()!!.results.isNullOrEmpty() -> return NetworkResult.Error("No recipes found")
+            response.message().contains("timeout") -> return NetworkResult.Error("Timeout ${ErrorCodes.getErrorPrefix(ErrorCodes.NETWORK_TIMEOUT)}")
+            response.code() == 402 -> return NetworkResult.Error("Api Limit exceeded ${ErrorCodes.getErrorPrefix(ErrorCodes.API_LIMIT_EXCEED)}")
+            response.body() == null -> return NetworkResult.Error("No recipe to found ${ErrorCodes.getErrorPrefix(ErrorCodes.NO_RECIPE_FOUND)}")
+            response.body()!!.results.isNullOrEmpty() -> return NetworkResult.Error("No recipes found ${ErrorCodes.getErrorPrefix(ErrorCodes.NO_RECIPE_FOUND)}")
             response.isSuccessful -> return NetworkResult.Success(data = response.body()!!)
         }
-        return NetworkResult.Error("Failed to handle response")
+        return NetworkResult.Error("Failed to handle response ${ErrorCodes.getErrorPrefix(ErrorCodes.FAILED_TO_HANDLE_RESPONSE)}")
     }
 
 
-    fun hasInternetConnection(): Boolean {
+    private fun hasInternetConnection(): Boolean {
 
         val connectivityManager: ConnectivityManager =
             getApplication<Application>().getSystemService(

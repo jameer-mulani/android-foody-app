@@ -18,6 +18,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginRight="4dp">
 
         <com.google.android.material.card.MaterialCardView
@@ -45,6 +46,7 @@
                     android:layout_height="0dp"
                     android:contentDescription="@string/recipe_image"
                     android:scaleType="centerCrop"
+                    recipeImage="@{result.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -99,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="32dp"
-                    android:text="@{result.aggregateLikes}"
+                    numOfLikes="@{result.aggregateLikes}"
                     android:textColor="@color/red"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/recipeImageView"
@@ -121,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="32dp"
-                    android:text="@{result.readyInMinutes}"
+                    cookingMinutes="@{result.readyInMinutes}"
                     android:textColor="@color/yellow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/heart_tv"
@@ -130,6 +132,7 @@
                 <ImageView
                     android:id="@+id/vegan_ic"
                     app:tint="@color/darkGray"
+                    veganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@+id/vegan_tv"
@@ -142,7 +145,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Yes"
+                    veganColor="@{result.vegan}"
+                    android:text="Vegan"
                     app:layout_constraintStart_toEndOf="@+id/clock_tv"
                     app:layout_constraintTop_toBottomOf="@+id/vegan_ic" />
 
