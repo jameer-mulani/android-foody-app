@@ -5,13 +5,17 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.foodyappstefan2023.models.data.models.FoodRecipe
-import com.example.foodyappstefan2023.models.repository.FoodRepository
+import com.example.foodyappstefan2023.data.models.FoodRecipe
+import com.example.foodyappstefan2023.data.repository.FoodRepository
+import com.example.foodyappstefan2023.data.room.RecipeEntity
 import com.example.foodyappstefan2023.utils.Constants.ErrorCodes
 import com.example.foodyappstefan2023.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -22,6 +26,7 @@ class MainViewModel @Inject constructor(
     private val foodRepository: FoodRepository
 ) : AndroidViewModel(application = application) {
 
+    val recipeFromDatabase : LiveData<List<RecipeEntity>> = foodRepository.localDataSource.getRecipes().asLiveData()
 
     private val _recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
@@ -37,6 +42,12 @@ class MainViewModel @Inject constructor(
             if (hasInternetConnection()) {
                 val response = foodRepository.remoteDataSource.getRecipes(queries)
                 _recipesResponse.value = handleRecipesResponse(response)
+
+                val foodRecipe = _recipesResponse.value?.data
+                if (foodRecipe != null){
+                    cacheRecipes(foodRecipe)
+                }
+
             } else {
                 _recipesResponse.value = NetworkResult.Error(
                     "No internet connection ${
@@ -56,10 +67,22 @@ class MainViewModel @Inject constructor(
 
     }
 
+    private fun cacheRecipes(foodRecipe: FoodRecipe) {
+        val recipeEntity = RecipeEntity(foodRecipe)
+        insertRecipes(recipeEntity)
+    }
+
+    private fun insertRecipes(recipeEntity: RecipeEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            foodRepository.localDataSource.insertRecipes(recipeEntity)
+        }
+    }
+
     private fun handleRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
         when {
             response.message().contains("timeout") -> return NetworkResult.Error("Timeout ${ErrorCodes.getErrorPrefix(ErrorCodes.NETWORK_TIMEOUT)}")
             response.code() == 402 -> return NetworkResult.Error("Api Limit exceeded ${ErrorCodes.getErrorPrefix(ErrorCodes.API_LIMIT_EXCEED)}")
+            response.code() == 401 -> return NetworkResult.Error("Not Authorized ${ErrorCodes.getErrorPrefix(ErrorCodes.NOT_UNAUTHORIZED)}")
             response.body() == null -> return NetworkResult.Error("No recipe to found ${ErrorCodes.getErrorPrefix(ErrorCodes.NO_RECIPE_FOUND)}")
             response.body()!!.results.isNullOrEmpty() -> return NetworkResult.Error("No recipes found ${ErrorCodes.getErrorPrefix(ErrorCodes.NO_RECIPE_FOUND)}")
             response.isSuccessful -> return NetworkResult.Success(data = response.body()!!)

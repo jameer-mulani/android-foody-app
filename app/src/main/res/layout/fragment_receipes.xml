@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="mainViewModel"
+            type="com.example.foodyappstefan2023.viewmodels.MainViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +55,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -64,6 +68,9 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:alpha="0.5"
+                android:visibility="gone"
+                apiResult="@{mainViewModel.recipeResponse}"
+                databaseResult="@{mainViewModel.recipeFromDatabase}"
                 android:contentDescription="@string/sad_icon"
                 android:src="@drawable/ic_sad" />
 
@@ -71,6 +78,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:visibility="gone"
+                apiResult2="@{mainViewModel.recipeResponse}"
+                databaseResult2="@{mainViewModel.recipeFromDatabase}"
                 android:text="@string/no_internet_connection"
                 android:textSize="22sp"
                 android:textStyle="bold" />

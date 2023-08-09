@@ -1,6 +1,6 @@
 package com.example.foodyappstefan2023.di
 
-import com.example.foodyappstefan2023.models.network.FoodRecipeApi
+import com.example.foodyappstefan2023.data.remote.FoodRecipeApi
 import com.example.foodyappstefan2023.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -39,8 +39,8 @@ object NetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
             .build()
     }
 
