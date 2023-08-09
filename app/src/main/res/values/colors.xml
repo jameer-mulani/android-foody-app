@@ -15,4 +15,12 @@
     <color name="green">#00C980</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    //chip style color
+
+    <color name="checkedChipBackgroundColor">#206200EA</color>
+    <color name="chipBackgroundColor">@color/lightGray</color>
+    <color name="checkedChipTextColor">@color/dark</color>
+    <color name="chipTextColor">@color/darker</color>
+
 </resources>

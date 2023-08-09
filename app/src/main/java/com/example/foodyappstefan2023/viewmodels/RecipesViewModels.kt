@@ -13,8 +13,8 @@ class RecipesViewModels @Inject constructor(application: Application) : AndroidV
     fun getRecipeQueries(): Map<String, String> {
         return mapOf(
             Constants.QUERY_API_KEY to Constants.API_KEY,
-            Constants.QUERY_TYPE to "snack",
-            Constants.QUERY_DIET to "vegan",
+            Constants.QUERY_TYPE to "main course",
+            Constants.QUERY_DIET to "gluten free",
 //            Constants.QUERY_ADD_RECIPE_INFO to "true",
 //            Constants.QUERY_FILL_INGREDIENTS to "true"
         )
